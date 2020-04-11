@@ -621,7 +621,7 @@ public class UnitTest {
 		} catch (Throwable e) {
 			TestRunner.fail("Fail to handle deletion", e);
 		}
-	}	
+	}
 
 	/**
 	 * Test ceiling Entry with null.

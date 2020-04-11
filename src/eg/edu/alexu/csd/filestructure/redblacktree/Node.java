@@ -12,7 +12,15 @@ public class Node<T extends Comparable<T>, V> implements INode<T, V> {
         this.value=value;
         this.parent=parent;
         //node is created with default color red
-        this.color=true;
+        this.color=INode.RED;
+        //construct children as tail nodes
+        this.leftChild=new Node<T,V>(this);
+        this.rightChild=new Node<T,V>(this);
+    }
+    public Node(INode<T, V> parent){
+        this.parent=parent;
+        //null node is created with Black color ( tail )
+        this.color=INode.BLACK;
     }
     @Override
     public void setParent(INode<T, V> parent) {
@@ -76,6 +84,6 @@ public class Node<T extends Comparable<T>, V> implements INode<T, V> {
 
     @Override
     public boolean isNull() {
-        return this.value==null;
+        return this.key==null;
     }
 }
