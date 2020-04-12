@@ -7,24 +7,27 @@ public class Node<T extends Comparable<T>, V> implements INode<T, V> {
     T key;
     V value;
     boolean color;
-    public Node(T key,V value,INode<T, V> parent){
-        this.key=key;
-        this.value=value;
-        this.parent=parent;
+
+    public Node(T key, V value, INode<T, V> parent) {
+        this.key = key;
+        this.value = value;
+        this.parent = parent;
         //node is created with default color red
-        this.color=INode.RED;
+        this.color = INode.RED;
         //construct children as tail nodes
-        this.leftChild=new Node<T,V>(this);
-        this.rightChild=new Node<T,V>(this);
+        this.leftChild = new Node<T, V>(this);
+        this.rightChild = new Node<T, V>(this);
     }
-    public Node(INode<T, V> parent){
-        this.parent=parent;
+
+    public Node(INode<T, V> parent) {
+        this.parent = parent;
         //null node is created with Black color ( tail )
-        this.color=INode.BLACK;
+        this.color = INode.BLACK;
     }
+
     @Override
     public void setParent(INode<T, V> parent) {
-        this.parent=parent;
+        this.parent = parent;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class Node<T extends Comparable<T>, V> implements INode<T, V> {
 
     @Override
     public void setLeftChild(INode<T, V> leftChild) {
-        this.leftChild=leftChild;
+        this.leftChild = leftChild;
     }
 
     @Override
@@ -44,7 +47,7 @@ public class Node<T extends Comparable<T>, V> implements INode<T, V> {
 
     @Override
     public void setRightChild(INode<T, V> rightChild) {
-        this.rightChild=rightChild;
+        this.rightChild = rightChild;
     }
 
     @Override
@@ -59,7 +62,7 @@ public class Node<T extends Comparable<T>, V> implements INode<T, V> {
 
     @Override
     public void setKey(T key) {
-        this.key=key;
+        this.key = key;
     }
 
     @Override
@@ -69,7 +72,7 @@ public class Node<T extends Comparable<T>, V> implements INode<T, V> {
 
     @Override
     public void setValue(V value) {
-        this.value=value;
+        this.value = value;
     }
 
     @Override
@@ -79,11 +82,11 @@ public class Node<T extends Comparable<T>, V> implements INode<T, V> {
 
     @Override
     public void setColor(boolean color) {
-        this.color=color;
+        this.color = color;
     }
 
     @Override
     public boolean isNull() {
-        return this.key==null;
+        return this.key == null;
     }
 }
