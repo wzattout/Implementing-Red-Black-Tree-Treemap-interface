@@ -16,10 +16,9 @@ public class TreeMap<T extends Comparable<T>, V> implements ITreeMap<T, V> {
         s = headMap(lastKey(), true);
         for (int i = 0; i < s.size(); i++) {
             if (s.get(i).getKey().equals(key)) {
-                return Map.entry(s.get(i).getKey(), s.get(i).getValue());
+                return new AbstractMap.SimpleEntry<T,V>(s.get(i).getKey(), s.get(i).getValue());
             }
-        }
-        return null;
+        }        return null;
     }
 
     @Override
@@ -59,7 +58,7 @@ public class TreeMap<T extends Comparable<T>, V> implements ITreeMap<T, V> {
         INode<T, V> node = map.getRoot();
         while (!node.getLeftChild().isNull())
             node = node.getLeftChild();
-        return Map.entry(node.getKey(), node.getValue());
+        return new AbstractMap.SimpleEntry<T,V>(node.getKey(), node.getValue());
     }
 
     @Override
@@ -77,7 +76,7 @@ public class TreeMap<T extends Comparable<T>, V> implements ITreeMap<T, V> {
         s = headMap(lastKey(), true);
         for (int i = 0; i < s.size(); i++) {
             if (s.get(i).getKey().equals(key)) {
-                return Map.entry(s.get(i).getKey(), s.get(i).getValue());
+                return new AbstractMap.SimpleEntry<T,V>(s.get(i).getKey(), s.get(i).getValue());
             }
         }
         return null;
@@ -117,7 +116,7 @@ public class TreeMap<T extends Comparable<T>, V> implements ITreeMap<T, V> {
         INode<T, V> node = map.getRoot();
         while (!node.getRightChild().isNull())
             node = node.getRightChild();
-        return Map.entry(node.getKey(), node.getValue());
+        return new AbstractMap.SimpleEntry<T,V>(node.getKey(), node.getValue());
     }
 
     @Override
@@ -187,7 +186,7 @@ public class TreeMap<T extends Comparable<T>, V> implements ITreeMap<T, V> {
         if (node.isNull())
             return s;
         inOrderTraversal(s, node.getLeftChild());
-        s.add(Map.entry(node.getKey(), node.getValue()));
+        s.add(new AbstractMap.SimpleEntry<T,V>(node.getKey(), node.getValue()));
         inOrderTraversal(s, node.getRightChild());
         return s;
     }
@@ -197,9 +196,9 @@ public class TreeMap<T extends Comparable<T>, V> implements ITreeMap<T, V> {
             return s;
         inOrderTraversal(s, node.getLeftChild(), key, inclusive);
         if (node.getKey().compareTo(key) < 0)
-            s.add(Map.entry(node.getKey(), node.getValue()));
+            s.add(new AbstractMap.SimpleEntry<T,V>(node.getKey(), node.getValue()));
         else if (node.getKey().equals(key) && inclusive)
-            s.add(Map.entry(node.getKey(), node.getValue()));
+            s.add(new AbstractMap.SimpleEntry<T,V>(node.getKey(), node.getValue()));
         inOrderTraversal(s, node.getRightChild(), key, inclusive);
         return s;
     }
