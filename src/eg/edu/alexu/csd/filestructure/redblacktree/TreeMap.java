@@ -5,15 +5,17 @@ import java.util.*;
 
 public class TreeMap<T extends Comparable<T>, V> implements ITreeMap<T, V> {
 
-    IRedBlackTree<T, V> map = new RedBlackTree<T, V>();
-    int size = 0;
+    private IRedBlackTree<T, V> map = new RedBlackTree<T, V>();
+    private int size = 0;
 
     @Override
     public Map.Entry<T, V> ceilingEntry(T key) {
-        if (key == null || size == 0)
+        if (key == null)
             throw new RuntimeErrorException(new Error());
+        if (size == 0)
+            return null;
         INode<T, V> node = map.getRoot(), ceil = null;
-        while (!node.isNull() || node != null) {
+        while (node != null && !node.isNull()) {
             if (node.getKey().equals(key)) {
                 return new AbstractMap.SimpleEntry<T, V>(node.getKey(), node.getValue());
             } else if (node.getKey().compareTo(key) < 0) {
@@ -81,10 +83,12 @@ public class TreeMap<T extends Comparable<T>, V> implements ITreeMap<T, V> {
 
     @Override
     public Map.Entry<T, V> floorEntry(T key) {
-        if (key == null || size == 0)
+        if (key == null)
             throw new RuntimeErrorException(new Error());
+        if (size == 0)
+            return null;
         INode<T, V> node = map.getRoot(), floor = null;
-        while (!node.isNull() || node != null) {
+        while (node != null && !node.isNull()) {
             if (node.getKey().equals(key)) {
                 return new AbstractMap.SimpleEntry<T, V>(node.getKey(), node.getValue());
             } else if (node.getKey().compareTo(key) > 0) {
@@ -183,6 +187,8 @@ public class TreeMap<T extends Comparable<T>, V> implements ITreeMap<T, V> {
 
     @Override
     public boolean remove(T key) {
+        if (key == null)
+            throw new RuntimeErrorException(new Error());
         if (map.contains(key))
             size--;
         return map.delete(key);
